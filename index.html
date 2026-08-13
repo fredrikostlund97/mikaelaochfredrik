@@ -25,7 +25,7 @@
 
     body {
       background: var(--cream);
-      color: var(--ink);
+      color: var(--blue);
       font-family: 'Patrick Hand', cursive;
       font-size: 19px;
       line-height: 1.7;
@@ -117,6 +117,14 @@
 
     section:last-child { border-bottom: none; }
 
+    section.centered { text-align: center; }
+
+    .content-link {
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 2px solid var(--blue-light);
+    }
+
     .h2-with-illo {
       display: flex;
       align-items: center;
@@ -134,7 +142,7 @@
       font-size: clamp(32px, 7vw, 48px);
       font-weight: 700;
       color: var(--blue);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: .03em;
     }
 
@@ -149,7 +157,7 @@
     strong {
       font-family: 'Amatic SC', cursive;
       font-weight: 700;
-      font-size: 24px;
+      font-size: 26px;
       color: var(--blue);
       letter-spacing: .02em;
     }
@@ -471,15 +479,15 @@
     </div>
   </section>
 
-  <section style="text-align:center;">
+  <section class="centered">
     <h2>Tack</h2>
 
     <div class="section-illo" aria-hidden="true">
       <img src="img/hjärtan1.svg" alt="">
     </div>
 
-    <p>Vi vet att vi ber om mycket genom att ha bröllop i Rom. Vi blir inte det minsta besvikna om ni inte har möjlighet att komma</p>
-    <p>Vi önskar att ni inte tar med presenter - er närvaro är den bästa gåvan!</p>
+    <p>Vi vet att vi ber om mycket genom att ha bröllop i Rom. Vi blir inte det minsta besvikna på er om ni inte har möjlighet att komma</p>
+    <p>Vi önskar att ni inte tar med presenter</p>
 
     <p><strong>Resa</strong><br>
     Gästerna arrangerar resa på egen hand</p>
@@ -488,20 +496,21 @@
     Gästerna arrangerar boende på egen hand</p>
 
     <p><strong>Klädkod</strong><br>
-    <a href="kladkod.html" style="color:var(--blue);border-bottom:2px solid var(--blue-light);text-decoration:none;">Kavaj</a></p>
+    <a href="kladkod.html" class="content-link">Kavaj</a></p>
 
     <p><strong>Specialkost</strong><br>
     Ange eventuell kost vid OSA</p>
   </section>
 
-  <section style="text-align:center;">
+  <section class="centered">
     <h2>OSA</h2>
 
     <div class="section-illo" aria-hidden="true">
       <img src="img/brev-med-hjärta.svg" alt="">
     </div>
 
-    <p>Vi behöver ert svar senast den 1 juni 2027. Hör av er till oss direkt!</p>
+    <p>Vi behöver ert svar senast den 1 december 2026 </p>
+    <p>Om ni vet med er redan nu att ni kan eller inte kan komma så underlättar det med svar så fort som möjligt!</p>
   </section>
 
 </main>
