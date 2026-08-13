@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rom enligt oss</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #F5F0E8;
+      --blue:      #1E3A6E;
+      --blue-light:#4A6FA5;
+      --blue-pale: #E8EDF5;
+      --ink:       #1E1E2A;
+      --muted:     #5A6A82;
+      --rule:      rgba(30,58,110,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--blue);
+      font-family: 'Patrick Hand', cursive;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    header {
+      text-align: center;
+      padding: 48px 24px 16px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 16px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+      transition: color .2s;
+    }
+
+    .back-link:hover { color: var(--blue); }
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      font-size: clamp(48px, 12vw, 80px);
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1.1;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    section {
+      padding: 32px 0;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-family: 'Amatic SC', cursive;
+      font-size: clamp(32px, 7vw, 48px);
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 12px;
+      letter-spacing: .03em;
+    }
+
+    p {
+      font-size: 19px;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    .place-name {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .placeholder {
+      padding: 24px 20px;
+      border: 2px dashed var(--rule);
+      border-radius: 8px;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 2px solid var(--rule);
+    }
+
+    .footer-illo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .footer-illo img {
+      width: 60px;
+      height: auto;
+    }
+
+    footer p {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    /* ── Hamburger menu ── */
+    .menu-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1000;
+      background: var(--blue);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2.5px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-overlay nav {
+      text-align: center;
+    }
+
+    .nav-overlay nav a {
+      display: block;
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 42px;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 12px 0;
+      letter-spacing: .03em;
+    }
+
+    .nav-overlay nav a:hover {
+      color: var(--blue-light);
+    }
+
+    .nav-overlay nav a.disabled {
+      color: var(--muted);
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="menu-toggle" aria-label="Meny" onclick="document.querySelector('.nav-overlay').classList.toggle('open'); this.classList.toggle('open')">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="nav-overlay">
+  <nav>
+    <a href="index.html">Hem</a>
+    <a href="kladkod.html">Klädkod</a>
+    <a href="rom.html">Rom enligt oss</a>
+    <a href="#" class="disabled">OSA</a>
+  </nav>
+</div>
+
+<header>
+  <a href="index.html" class="back-link">&larr; Tillbaka</a>
+  <h1>Rom enligt oss</h1>
+</header>
+
+<main>
+
+  <p class="intro">
+    Bröllopet är bara en dag — men om ni är i Rom flera dagar så kommer här lite tips från oss!
+  </p>
+
+  <section>
+    <h2>Restauranger</h2>
+    <p><span class="place-name">Il Corallo</span><br>
+    Via del Corallo 10, nära Piazza Navona. Klassisk romsk pizza (tunn och knaprig) och pasta. Våra favoriter är pasta Arrabiata och pizza Rossa con burrata e basilico!</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.711245761134!2d12.46995!3d41.899066700000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f60452f251c75%3A0xb7a1c67f70f9bb04!2sIl%20Corallo!5e0!3m2!1sen!2sse!4v1786640129412!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+    <p style="margin-top:24px;"><span class="place-name">Il Maritozzo Rosso</span><br>
+    Roms bästa carbonara. Spartanskt ställe med papptallrikar - men carbonaran är banger</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.1421648146666!2d12.466884519212504!3d41.889799582775616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258ae1dc2be429%3A0xf654cd54d70606e2!2sIl%20Maritozzo%20Rosso%20-%20kitchen%20lab!5e0!3m2!1sen!2sse!4v1786640461662!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+    <p style="margin-top:24px;"><span class="place-name">MASTO a Testaccio</span><br>
+    Ligger i arbetarkvarteret Testaccio. Mycket vin, chark och ost — men även riktigt god pasta.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.687239524327!2d12.47727189999999!3d41.87807509999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f602e6ca869f3%3A0xa9d778ec3a77d8c7!2sMASTO%20a%20Testaccio%20I%20Roma!5e0!3m2!1sen!2sse!4v1786640891019!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </section>
+
+  <section>
+    <h2>Barer</h2>
+    <p><span class="place-name">Bar San Calisto</span><br>
+    Sköna vibes med mycket folk. Billiga drinkar och lokal stämning i Trastevere.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.176472873111!2d12.470803499999997!3d41.8890617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f60386ddce831%3A0x126d59288460dbb3!2sBar%20San%20Calisto!5e0!3m2!1sen!2sse!4v1786641005951!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+    <p style="margin-top:24px;"><span class="place-name">ANTIGALLERY</span><br>
+    Trendiga ungdomar som hänger utomhus. Aperol i plastglas. Hippt.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.873185760442!2d12.4929955!3d41.89558429999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b04ed33c01%3A0x4e0433b8c519ffb1!2sANTIGALLERY!5e0!3m2!1sen!2sse!4v1786641074248!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+    <p style="margin-top:24px;"><span class="place-name">Abbey Theatre</span><br>
+    Ligger på vår favoritgata i Rom - överlag mycket mysiga restauranger och butiker här. Peroni och Birra Moretti Rossa på fat, AC inomhus och uteservering. Ingen sätter sig på en irländsk bar i Rom, så alltid lediga platser.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.746900102156!2d12.4706!3d41.8983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f604517fd13cf%3A0x3a1f5369ad34c6ff!2sAbbey%20Theatre%20%E2%80%A2%20Irish%20Pub%20Rome!5e0!3m2!1sen!2sse!4v1786641139296!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </section>
+
+  <section>
+    <h2>Sevärdheter</h2>
+    <p>Inte de vanliga turistfällorna — här är grejer ni kanske missat.</p>
+
+    <p style="margin-top:24px;"><span class="place-name">San Clemente</span><br>
+    Kyrka på kyrka på kyrka. Tre lager historia ovanpå varandra — gå ner i underjorden.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.1635953820332!2d12.495000776081882!3d41.88933866471042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b84d7e5de9%3A0x97e138e66d21b151!2sBasilica%20of%20San%20Clemente!5e0!3m2!1sen!2sse!4v1786641338830!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+    <p style="margin-top:24px;"><span class="place-name">Le Domus Romane di Palazzo Valentini</span><br>
+    En visuell upplevelse över hur det såg ut i Roms villor. Projektion och ljud över antika ruiner under en modern byggnad.</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.8656475586527!2d12.48149536259038!3d41.89574640869375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f604d35b560af%3A0xb9795d4d7e020f01!2sLe%20Domus%20Romane%20di%20Palazzo%20Valentini!5e0!3m2!1sen!2sse!4v1786641450422!5m2!1sen!2sse" width="100%" height="250" style="border:0;border-radius:8px;margin-top:12px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </section>
+
+  <section>
+    <h2>Områden</h2>
+    <div class="placeholder">Tips kommer snart...</div>
+  </section>
+
+  <section>
+    <h2>Gelato</h2>
+    <div class="placeholder">Tips kommer snart...</div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-illo" aria-hidden="true">
+    <img src="img/ciao.svg" alt="">
+  </div>
+  <p>Mikaela &amp; Fredrik · 25 september 2027 · Roma</p>
+</footer>
+
+</body>
+</html>
